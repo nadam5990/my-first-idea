@@ -16,13 +16,102 @@
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #1e293b;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ddd6fe 100%);
+            color: #1e1b4b;
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* --- Header Styles --- */
+        header {
+            background: linear-gradient(90deg, #4c1d95 0%, #6d28d9 100%);
+            color: #ffffff;
+            padding: 1rem 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-icon {
+            width: 20px;
+            height: 20px;
+            color: #ffffff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            opacity: 0.85;
+            transition: opacity 0.2s ease;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* --- Main Content Styles --- */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .section {
+            width: 100%;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            min-height: calc(100vh - 120px); /* 헤더, 푸터 여백 차감 */
+        }
+
+        /* 첫 섹션 배경 구분을 원본에서 가져올 수 있으나 body에 있으므로 pass */
+        #feature-section {
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        #review-section {
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+            text-align: center;
         }
 
         .container {
@@ -46,9 +135,9 @@
 
         h1 {
             font-size: 42px;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -57,15 +146,17 @@
 
         .subtitle {
             font-size: 0.9rem;
-            font-weight: 500;
-            color: #64748b;
+            font-weight: 400;
+            color: #6d28d9;
+            opacity: 0.8;
             letter-spacing: 0.05em;
             margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
             color: #ffffff;
             text-decoration: none;
             padding: 12px 32px;
@@ -73,20 +164,83 @@
             font-size: 0.95rem;
             font-weight: 600;
             letter-spacing: -0.01em;
-            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+            box-shadow: 0 4px 14px 0 rgba(139, 92, 216, 0.39);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.45);
         }
 
         .btn:active {
             transform: translateY(1px);
+        }
+
+        /* --- Review Section Styles --- */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .review-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e2e8f0;
+        }
+
+        .user-details h4 {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 0.1rem;
+            font-weight: 700;
+        }
+
+        .user-details p {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .review-text {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* --- Footer Styles --- */
+        footer {
+            background-color: #e2e8f0;
+            color: #64748b;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.875rem;
+            border-top: 1px solid #cbd5e1;
         }
 
         @keyframes fadeIn {
@@ -113,24 +267,102 @@
         @media (max-width: 768px) {
             .card {
                 padding: 2rem 2.5rem;
-                margin: 0 20px;
+                margin: 0 16px;
             }
             h1 {
                 font-size: 32px;
+            }
+            .subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+            .btn {
+                padding: 14px 40px;
+                font-size: 1rem;
+                width: 100%; /* 모바일에서 누르기 편하게 꽉 차게 */
+                max-width: 280px;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                padding: 0 16px;
+            }
+            .review-text {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <h1 id="message">오늘도 힘내세요!</h1>
-            <p class="subtitle">Have a wonderful and productive day</p>
-            <button id="next-btn" class="btn">다음 문장 보기</button>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-area">
+            <!-- Magic Wand SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-icon">
+                <path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 5.8l1.4-1.4"/><path d="M12.2 11.4l1.4-1.4"/><path d="M12.2 5.8l-1.4-1.4"/><path d="M17.8 11.4l-1.4-1.4"/><path d="M2 22l5-5"/><path d="M8.5 11.5l2.5 2.5 8-8-2.5-2.5-8 8z"/>
+            </svg>
+            <h2>나의 첫 서비스</h2>
         </div>
-    </div>
+        <nav>
+            <ul>
+                <li><a href="#">소개</a></li>
+                <li><a href="#">기능</a></li>
+                <li><a href="#">문의</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- MAIN (BODY) -->
+    <main>
+        <!-- Section 1: 핵심 기능 소개 -->
+        <section id="feature-section" class="section">
+            <h3 class="section-title">핵심 기능 소개</h3>
+            <div class="container">
+                <div class="card">
+                    <h1 id="message">오늘도 힘내세요!</h1>
+                    <p class="subtitle">Have a wonderful and productive day</p>
+                    <button id="next-btn" class="btn">다음 문장 보기</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 사용자 후기 -->
+        <section id="review-section" class="section">
+            <h3 class="section-title">사용자 후기</h3>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="user-info">
+                        <img src="user1.png" alt="User 1 Avatar" class="avatar">
+                        <div class="user-details">
+                            <h4>김철수</h4>
+                            <p>UX 디자이너</p>
+                        </div>
+                    </div>
+                    <p class="review-text">"매일 아침 이 서비스를 켜고 응원 문구를 확인하는 것만으로도 하루를 활기차게 시작할 수 있게 됐어요. 디자인이 예뻐서 자꾸 들어오게 되네요!"</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="user-info">
+                        <img src="user2.png" alt="User 2 Avatar" class="avatar">
+                        <div class="user-details">
+                            <h4>이영희</h4>
+                            <p>프론트엔드 개발자</p>
+                        </div>
+                    </div>
+                    <p class="review-text">"기능은 심플한데 UI/UX 완성도가 정말 높아서 감동했습니다. 다음 문장 보기 버튼을 누를 때마다 색상이 변하는 인터랙션이 너무 매력적이에요!"</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 My Service</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
     <script>
         const messages = [
             "오늘도 힘내세요!",
@@ -139,20 +371,18 @@
             "이대로 계속 가봅시다."
         ];
         
-        // 문장별 버튼 그라데이션 색상 매핑
         const colors = [
-            "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)", // 기본 파란색 (오늘도 힘내세요!)
-            "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", // 노란색 (오늘도 해냈어요!)
-            "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", // 주황색 (조금씩 나아지고 있어요.)
-            "linear-gradient(135deg, #10b981 0%, #059669 100%)"  // 초록색 (이대로 계속 가봅시다.)
+            "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)", // 주 색상
+            "linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)", // 보라색 채도 업
+            "linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%)", // 더 짙은 보라색
+            "linear-gradient(135deg, #4c1d95 0%, #2e1066 100%)"  // 보조 어두운 계열
         ];
         
-        // 마우스 호버 시 색상 (투명도나 명도 조정)
         const hoverColors = [
-            "linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)",
-            "linear-gradient(135deg, #d97706 0%, #b45309 100%)",
-            "linear-gradient(135deg, #ea580c 0%, #c2410c 100%)",
-            "linear-gradient(135deg, #059669 0%, #047857 100%)"
+            "linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%)", // 호버 보조색
+            "linear-gradient(135deg, #5b21b6 0%, #3b0764 100%)",
+            "linear-gradient(135deg, #4c1d95 0%, #2e1066 100%)",
+            "linear-gradient(135deg, #2e1066 0%, #1e0033 100%)"
         ];
         
         const messageEl = document.getElementById('message');
@@ -162,20 +392,16 @@
         btnEl.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % messages.length;
             messageEl.textContent = messages[currentIndex];
-            
-            // 버튼 배경 그라데이션 업데이트
             btnEl.style.background = colors[currentIndex];
-            // 활성화된 버튼 색상에 따른 그림자 조절 (옵션)
             const shadowColors = [
-                'rgba(37, 99, 235, 0.4)',
-                'rgba(245, 158, 11, 0.4)',
-                'rgba(249, 115, 22, 0.4)',
-                'rgba(16, 185, 129, 0.4)'
+                'rgba(139, 92, 216, 0.4)',
+                'rgba(124, 58, 237, 0.4)',
+                'rgba(109, 40, 217, 0.4)',
+                'rgba(76, 29, 149, 0.4)'
             ];
             btnEl.style.boxShadow = `0 4px 14px 0 ${shadowColors[currentIndex]}`;
         });
 
-        // 마우스 호버 인아웃 이벤트 동적 수정 
         btnEl.addEventListener('mouseenter', () => {
             btnEl.style.background = hoverColors[currentIndex];
         });
