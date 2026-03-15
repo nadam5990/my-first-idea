@@ -16,8 +16,8 @@
 
         body {
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 100%);
-            color: #0f172a;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -26,29 +26,74 @@
         }
 
         .container {
-            text-align: center;
             opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
+            animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2.5rem 4rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05),
+                        0 8px 10px -6px rgba(0, 0, 0, 0.05),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            text-align: center;
+            animation: float 6s ease-in-out infinite;
         }
 
         h1 {
-            font-size: 6.5rem;
+            font-size: 42px;
             font-weight: 800;
-            letter-spacing: -0.03em;
-            background: linear-gradient(to right, #1e3a8a, #2563eb, #3b82f6);
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
-            animation: float 6s ease-in-out infinite;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #64748b;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px) scale(0.95);
+                transform: translateY(20px) scale(0.98);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -56,23 +101,22 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0px);
             }
-
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-10px);
             }
         }
 
-        /* 반응형 디자인을 위한 미디어 쿼리 */
+        /* 반응형 디자인 */
         @media (max-width: 768px) {
+            .card {
+                padding: 2rem 2.5rem;
+                margin: 0 20px;
+            }
             h1 {
-                font-size: 3.5rem;
-                padding: 0 20px;
-                word-break: keep-all;
+                font-size: 32px;
             }
         }
     </style>
@@ -80,8 +124,65 @@
 
 <body>
     <div class="container">
-        <h1>내 첫번째 아이디어</h1>
+        <div class="card">
+            <h1 id="message">오늘도 힘내세요!</h1>
+            <p class="subtitle">Have a wonderful and productive day</p>
+            <button id="next-btn" class="btn">다음 문장 보기</button>
+        </div>
     </div>
+
+    <script>
+        const messages = [
+            "오늘도 힘내세요!",
+            "오늘도 해냈어요!",
+            "조금씩 나아지고 있어요.",
+            "이대로 계속 가봅시다."
+        ];
+        
+        // 문장별 버튼 그라데이션 색상 매핑
+        const colors = [
+            "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)", // 기본 파란색 (오늘도 힘내세요!)
+            "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", // 노란색 (오늘도 해냈어요!)
+            "linear-gradient(135deg, #f97316 0%, #ea580c 100%)", // 주황색 (조금씩 나아지고 있어요.)
+            "linear-gradient(135deg, #10b981 0%, #059669 100%)"  // 초록색 (이대로 계속 가봅시다.)
+        ];
+        
+        // 마우스 호버 시 색상 (투명도나 명도 조정)
+        const hoverColors = [
+            "linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)",
+            "linear-gradient(135deg, #d97706 0%, #b45309 100%)",
+            "linear-gradient(135deg, #ea580c 0%, #c2410c 100%)",
+            "linear-gradient(135deg, #059669 0%, #047857 100%)"
+        ];
+        
+        const messageEl = document.getElementById('message');
+        const btnEl = document.getElementById('next-btn');
+        let currentIndex = 0;
+
+        btnEl.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % messages.length;
+            messageEl.textContent = messages[currentIndex];
+            
+            // 버튼 배경 그라데이션 업데이트
+            btnEl.style.background = colors[currentIndex];
+            // 활성화된 버튼 색상에 따른 그림자 조절 (옵션)
+            const shadowColors = [
+                'rgba(37, 99, 235, 0.4)',
+                'rgba(245, 158, 11, 0.4)',
+                'rgba(249, 115, 22, 0.4)',
+                'rgba(16, 185, 129, 0.4)'
+            ];
+            btnEl.style.boxShadow = `0 4px 14px 0 ${shadowColors[currentIndex]}`;
+        });
+
+        // 마우스 호버 인아웃 이벤트 동적 수정 
+        btnEl.addEventListener('mouseenter', () => {
+            btnEl.style.background = hoverColors[currentIndex];
+        });
+        btnEl.addEventListener('mouseleave', () => {
+            btnEl.style.background = colors[currentIndex];
+        });
+    </script>
 </body>
 
 </html>
